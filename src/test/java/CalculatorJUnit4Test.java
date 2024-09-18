@@ -4,15 +4,22 @@
  */
 
 // import org.junit.Assume;
+import io.cucumber.junit.Cucumber;
+import io.cucumber.testng.CucumberOptions;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
 
-// This is a test class for the Calculator class.
-public class CalculatorJUnit4Test {
+@RunWith(Cucumber.class)
+@CucumberOptions(
+        features = "src/test/features",  // The location of your feature files
+        glue = "StepDefinitions",        // The package where your step definitions are located
+        plugin = {"pretty"}
+)public class CalculatorJUnit4Test {
 
     // This is a Calculator object that will be used in the tests.
     private Calculator calculator;
