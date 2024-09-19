@@ -43,17 +43,20 @@ public class Calculator {
 
     // Method to calculate the GCD (Greatest Common Divisor)
     public int gcd(int a, int b) {
-        while (b != 0) {
-            int temp = b;
-            b = a % b;
-            a = temp;
+        if (b == 0) {
+            return a;  // When b is 0, return a as the GCD
         }
-        return a;
+        return gcd(b, a % b);  // Recursively call gcd with the remainder
     }
 
-    // Method to calculate the LCM (Least Common Multiple)
+
     public int lcm(int a, int b) {
-        return (a * b) / gcd(a, b); // LCM(a, b) = |a * b| / GCD(a, b)
+        if (a == 0 || b == 0) {
+            return 0; // LCM of zero with any number is zero
+        }
+        int gcdValue = gcd(a, b);
+        int lcmValue = Math.abs(a * b) / gcdValue;
+        return lcmValue;
     }
 
     // Method to calculate the nth Fibonacci number using recursion
