@@ -1,4 +1,4 @@
-package StepDefinitions;
+package stepdefinition;
 
 import static org.junit.Assert.*;
 import io.cucumber.java.en.*;
@@ -7,8 +7,8 @@ public class CalculatorStepDefinitions {
 
     private Calculator calculator;
     private double result;
-    private int gcdResult;
-    private int lcmResult;
+    // private int gcdResult;
+    // private int lcmResult;
     private Exception exception;
 
     @Given("I have a Calculator")
@@ -66,4 +66,46 @@ public class CalculatorStepDefinitions {
         assertEquals(expectedResult, result);
     }
 
+    // Step Definitions for multiply
+    @When("I multiply {int} and {int}")
+    public void i_multiply_and(int a, int b) {
+        result = calculator.multiply(a, b);
+    }
+
+    @Then("the multiplication result should be {int}")
+    public void the_multiplication_result_should_be(int expectedResult) {
+        assertEquals(expectedResult, (int) result);
+    }
+
+    // Step Definitions for modulo
+    @When("I calculate {int} modulo {int}")
+    public void i_calculate_modulo(int a, int b) {
+        try {
+            result = calculator.mod(a, b);
+        } catch (ArithmeticException e) {
+            exception = e;
+        }
+    }
+
+    @Then("the modulo result should be {int}")
+    public void the_modulo_result_should_be(int expectedResult) {
+        assertEquals(expectedResult, (int) result);
+    }
+
+    @Then("an ArithmeticException should be thrown with message {string}")
+    public void an_arithmetic_exception_should_be_thrown_with_message(String message) {
+        assertNotNull(exception);
+        assertEquals(message, exception.getMessage());
+    }
+
+    // Step Definitions for power
+    @When("I calculate {int} to the power of {int}")
+    public void i_calculate_to_the_power_of(int base, int exponent) {
+        result = calculator.power(base, exponent);
+    }
+
+    @Then("the power result should be {int}")
+    public void the_power_result_should_be(int expectedResult) {
+        assertEquals(expectedResult, (int) result);
+    }
 }

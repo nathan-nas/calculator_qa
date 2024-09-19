@@ -15,11 +15,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(
-        features = "src/test/features",  // The location of your feature files
-        glue = "StepDefinitions",        // The package where your step definitions are located
-        plugin = {"pretty"}
-)public class CalculatorJUnit4Test {
+@CucumberOptions(features = "src/test/features", // The location of your feature files
+        glue = "StepDefinitions", // The package where your step definitions are located
+        plugin = { "pretty" })
+public class CalculatorJUnit4Test {
 
     // This is a Calculator object that will be used in the tests.
     private Calculator calculator;
@@ -139,5 +138,33 @@ import static org.junit.Assert.assertThrows;
     public void testFibonacciFailure() {
         // Test for invalid inputs like negative Fibonacci indices
         calculator.fibonacci(-5); // Fibonacci of negative number should throw exception
+    }
+
+    @Test
+    public void testMod() {
+        // Test positive values
+        assertEquals(1, calculator.mod(10, 3));
+        assertEquals(0, calculator.mod(10, 5));
+
+        // Test negative values
+        assertEquals(-1, calculator.mod(-10, 3));
+        assertEquals(2, calculator.mod(-10, 4));
+
+        // Test zero divisor
+        Exception exception = assertThrows(ArithmeticException.class, () -> {
+            calculator.mod(10, 0);
+        });
+        assertEquals("Division by zero", exception.getMessage());
+    }
+
+    @Test
+    public void testPower() {
+        // Test base and positive exponent
+        assertEquals(32, calculator.power(2, 5));
+        assertEquals(1, calculator.power(5, 0)); // any number raised to power 0 is 1
+        assertEquals(0, calculator.power(0, 5)); // 0 raised to any power is 0
+
+        // Test base 1 and exponent
+        assertEquals(1, calculator.power(1, 1000)); // 1 raised to any power is 1
     }
 }

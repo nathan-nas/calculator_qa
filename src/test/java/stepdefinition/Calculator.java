@@ -1,4 +1,4 @@
-package StepDefinitions;
+package stepdefinition;
 
 /*
     Source code is based on the material from Katalon:
@@ -44,11 +44,10 @@ public class Calculator {
     // Method to calculate the GCD (Greatest Common Divisor)
     public int gcd(int a, int b) {
         if (b == 0) {
-            return a;  // When b is 0, return a as the GCD
+            return a; // When b is 0, return a as the GCD
         }
-        return gcd(b, a % b);  // Recursively call gcd with the remainder
+        return gcd(b, a % b); // Recursively call gcd with the remainder
     }
-
 
     public int lcm(int a, int b) {
         if (a == 0 || b == 0) {
@@ -67,5 +66,23 @@ public class Calculator {
         return fibonacci(n - 1) + fibonacci(n - 2);
     }
 
-}
+    // Function to calculate the modulo
+    public int mod(int a, int b) {
+        if (b == 0) {
+            throw new ArithmeticException("Division by zero");
+        }
 
+        int result = a - (a / b) * b;
+        return (result < 0) ? result + b : result;
+    }
+
+    // Function to calculate the power (iterative)
+    public int power(int base, int exponent) {
+        int result = 1;
+        for (int i = 0; i < exponent; i++) {
+            result *= base;
+        }
+        return result;
+    }
+
+}
