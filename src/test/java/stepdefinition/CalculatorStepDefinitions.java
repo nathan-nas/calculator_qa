@@ -108,4 +108,23 @@ public class CalculatorStepDefinitions {
     public void the_power_result_should_be(int expectedResult) {
         assertEquals(expectedResult, (int) result);
     }
+
+    @When("I calculate the Fibonacci number for {int}")
+    public void i_calculate_the_fibonacci_number_for(int index) {
+        try {
+            result = calculator.fibonacci(index);
+        } catch (Exception e) {
+            exception = e;
+        }
+    }
+
+    @Then("the Fibonacci result should be {int}")
+    public void the_fibonacci_result_should_be(int expectedResult) {
+        assertEquals(expectedResult, result);
+    }
+
+    @Then("an IllegalArgumentException should be thrown")
+    public void an_IllegalArgumentException_should_be_thrown() {
+        assertTrue(exception instanceof IllegalArgumentException);
+    }
 }
